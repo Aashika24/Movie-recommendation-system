@@ -1,0 +1,53 @@
+# CineMatch — Interactive Movie Recommendation Dashboard
+
+CineMatch is an interactive web dashboard for movie recommendations using:
+- **Content-based filtering** (TF-IDF similarity on `genres`, `director`, `cast`, `title`)
+- **Collaborative filtering** (item-item similarity derived from user ratings)
+
+## Features
+- Discover / Top Rated / Browse by Genre tabs
+- Live search (title / genres / director / cast)
+- Movie details modal
+- Two recommendation lists inside the modal:
+  - **You Might Also Like** (content-based)
+  - **Collaborative Picks** (collaborative)
+
+## Project Structure
+- `app.py` — Flask backend + recommendation APIs
+- `index.html` — Frontend dashboard (interactive UI)
+- `movies.csv` — Movie metadata + IMDb rating
+- `ratings.csv` — User ratings dataset
+
+## Setup
+### 1) Create a virtual environment (Windows)
+```bat
+python -m venv venv
+venv\Scripts\activate
+```
+
+### 2) Install dependencies
+```bat
+pip install -r requirements.txt
+```
+
+## Run
+From the project directory:
+```bat
+python app.py
+```
+Then open:
+- http://127.0.0.1:5000/
+
+## API Endpoints
+- `GET /api/stats`
+- `GET /api/genres`
+- `GET /api/movies/search?q=...`
+- `GET /api/movies/top?genre=...`
+- `GET /api/movies/<movie_id>`
+- `GET /api/movies/<movie_id>/similar`
+- `GET /api/recommend/collaborative?movie_id=...`
+
+## Notes
+- The backend validates that `movies.csv` and `ratings.csv` exist and contain required columns.
+- The frontend calls backend APIs using `window.location.origin` so it works correctly when run locally.
+
